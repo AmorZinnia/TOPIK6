@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>韩语 NoRedInk 式语法练习窗</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">ㄱ</span><div><b>韩语语法练习窗口</b><small>NoRedInk × 世宗 × KGIU × 延世练习感</small></div></div>
+  <nav>
+    <button data-view="dashboard" class="nav active">总览</button>
+    <button data-view="library" class="nav">语法库</button>
+    <button data-view="review" class="nav">今日复习</button>
+    <button data-view="wrongbook" class="nav">错题本</button>
+    <button data-view="settings" class="nav">设置/导出</button>
+  </nav>
+</header>
+<main>
+<section id="dashboard" class="view active">
+  <div class="hero card">
+    <div>
+      <p class="eyebrow">一站式韩语语法训练</p>
+      <h1>先诊断会不会，再进入 6 次复习循环。</h1>
+      <p>每个语法点都会走：讲解+基础题 → 变形+填空 → 对话+改错 → 阅读+O/X → 混合题 → 自由输出+复制给 ChatGPT 批改。</p>
+      <div class="hero-actions"><button id="startToday" class="primary">开始今日推荐</button><button data-view="library" class="secondary jump">打开语法库</button></div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat"><b id="statTotal">0</b><span>语法点</span></div>
+      <div class="stat"><b id="statLearning">0</b><span>学习中</span></div>
+      <div class="stat"><b id="statMastered">0</b><span>已掌握</span></div>
+      <div class="stat"><b id="statWrong">0</b><span>错题</span></div>
+    </div>
+  </div>
+  <div class="grid two">
+    <section class="card"><h2>机制</h2><ol class="steps"><li><b>诊断</b>：先做 4 题判断你是不是已经会。</li><li><b>精讲</b>：不会就看中英解释、接续、语感、易错点。</li><li><b>练习</b>：每次复习只练一种能力，不混成泛泛理论。</li><li><b>记录</b>：进度和错题存在浏览器本地。</li><li><b>输出</b>：第 6 次把韩语作文复制给 ChatGPT 批改。</li></ol></section>
+    <section class="card"><h2>今日队列</h2><div id="todayList" class="mini-list"></div></section>
+  </div>
+</section>
+<section id="library" class="view">
+  <div class="toolbar card"><input id="search" placeholder="搜索语法：例如 려면 / 때문에 / ㄴ데"/><select id="levelFilter"><option value="">全部等级</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>待分级</option></select><button id="resetFilters" class="secondary">重置</button></div>
+  <div id="grammarList" class="grammar-list"></div>
+</section>
+<section id="lesson" class="view">
+  <button class="secondary back" data-view="library">← 返回语法库</button>
+  <div id="lessonBox"></div>
+</section>
+<section id="practice" class="view">
+  <button class="secondary back" id="backToLesson">← 返回当前语法</button>
+  <div id="practiceBox"></div>
+</section>
+<section id="review" class="view">
+  <div class="card"><h1>今日复习</h1><p>这里会优先显示到期语法、未完成轮次和错题多的语法。</p><div id="reviewList" class="grammar-list"></div></div>
+</section>
+<section id="wrongbook" class="view"><div class="card"><h1>错题本</h1><p>所有答错题会自动进入这里，适合第 5 次混合题前集中复练。</p><div id="wrongList"></div></div></section>
+<section id="settings" class="view"><div class="card"><h1>设置 / 进度导出</h1><p>当前版本是单机本地网站，进度保存在浏览器 localStorage。换设备前请导出 JSON。</p><div class="settings-row"><button id="exportData" class="primary">导出进度 JSON</button><label class="importLabel">导入进度 JSON<input type="file" id="importData" accept="application/json" hidden></label><button id="clearData" class="danger">清空本地进度</button></div><textarea id="dataBox" placeholder="导出的 JSON 会出现在这里，也可以粘贴 JSON 后导入。"></textarea></div></section>
+</main>
+<footer>Made for self-paced Korean grammar practice. 不内置版权书页，只复刻题型机制与学习流程。</footer>
+<script src="grammarData.js"></script><script src="app.js"></script>
+</body></html>
